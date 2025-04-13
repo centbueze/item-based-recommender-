@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  /* Container Styling */
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #121212;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #f1f1f1;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.7;
+  }
+
+  /* Header Styling */
+  .about-container h1 {
+    text-align: center;
+    color: #e50914;
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  /* General Text Styling */
+  .about-container p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  /* Section Header Styling */
+  .about-container h2 {
+    font-size: 1.6rem;
+    margin-top: 30px;
+    color: #e50914;
+  }
+
+  /* List Styling */
+  .about-container ul {
+    padding-left: 20px;
+  }
+
+  .about-container li {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+
+  /* Add responsiveness for smaller screens */
+  @media (max-width: 768px) {
+    .about-container {
+      padding: 30px;
+    }
+
+    .about-container h1 {
+      font-size: 2.5rem;
+    }
+
+    .about-container h2 {
+      font-size: 1.4rem;
+    }
+
+    .about-container p, .about-container li {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<!-- Main Container for About Page Content -->
+<div class="about-container">
+  <h1>📺 Netflix Recommendation System</h1>
+  <p>
+    The <strong>Netflix Recommendation System</strong> is a content-based recommendation engine developed to suggest similar titles based on user input. Designed with a focus on simplicity, performance, and professional presentation, the system utilizes natural language processing techniques to derive semantic similarities between Netflix titles and provide intelligent recommendations in real time.
+  </p>
+
+  <h2>🔧 Overview</h2>
+  <p>
+    This application is built using a Python-based backend powered by Flask, and a responsive HTML/CSS/JavaScript frontend. It processes user queries and returns a curated list of Netflix shows or movies that are most similar in context to the given input.
+  </p>
+
+  <h2>💡 Key Features</h2>
+  <ul>
+    <li><strong>Content-Based Filtering:</strong> Utilizes a TF-IDF vectorizer to transform title and genre metadata into numerical representations, and computes cosine similarity to rank similar titles.</li>
+    <li><strong>Intelligent Matching:</strong> The system effectively matches partial and misspelled titles by leveraging text normalization and token-based similarity.</li>
+    <li><strong>Real-Time Recommendations:</strong> Asynchronous form submission and dynamic rendering enable smooth, immediate feedback for the user.</li>
+    <li><strong>Responsive UI:</strong> The user interface is designed with a clean, Netflix-inspired aesthetic and is fully responsive across devices.</li>
+    <li><strong>Robust Error Handling:</strong> Displays clear feedback for errors, empty results, or unrecognized input in a user-friendly manner.</li>
+  </ul>
+
+  <h2>🛠 Technical Stack</h2>
+  <ul>
+    <li><strong>Backend:</strong> Python 3.x, Flask (Micro web framework), Scikit-learn (TF-IDF Vectorizer, Cosine Similarity)</li>
+    <li><strong>Frontend:</strong> HTML5, CSS3 (Responsive Design), Vanilla JavaScript (Fetch API for asynchronous communication)</li>
+    <li><strong>Data:</strong> Netflix Titles Dataset (Kaggle)</li>
+  </ul>
+
+  <h2>🧠 Methodology</h2>
+  <ul>
+    <li><strong>Preprocessing:</strong> Title, type, and genre data are cleaned and concatenated into a single text corpus.</li>
+    <li><strong>Vectorization:</strong> TF-IDF is applied to encode the textual metadata into numerical vectors.</li>
+    <li><strong>Similarity Computation:</strong> Cosine similarity is used to determine the distance between the query title and the rest of the dataset.</li>
+    <li><strong>Recommendation Output:</strong> Top N results are returned with accompanying metadata including content type, genre, and similarity score.</li>
+  </ul>
+
+  <h2>📈 Potential Enhancements</h2>
+  <ul>
+    <li>Integration of collaborative filtering to incorporate user behavior and preferences.</li>
+    <li>Expansion of metadata to include cast, director, description, and release year for more nuanced recommendations.</li>
+    <li>Support for multi-language titles and filtering.</li>
+    <li>Deployment via platforms such as Render, Heroku, or AWS Lambda.</li>
+    <li>Integration with external APIs (e.g., TMDB, IMDb) for enriched data.</li>
+  </ul>
+
+  <h2>📦 Use Cases</h2>
+  <ul>
+    <li><strong>Entertainment Platforms:</strong> Enhance user engagement by embedding recommendation engines into streaming services.</li>
+    <li><strong>Media Discovery Tools:</strong> Aid users in discovering new content aligned with their tastes.</li>
+    <li><strong>NLP Education Projects:</strong> Serve as an illustrative example of practical NLP and recommender system techniques.</li>
+  </ul>
+</div>
+
+{% endblock %}

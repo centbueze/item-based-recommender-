@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: rgba(20, 20, 20, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(229, 9, 20, 0.3);
+  }
+
+  h1 {
+    text-align: center;
+    color: #e50914;
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+  }
+
+  form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    color: #fff;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+
+  input[type="text"]:focus {
+    background-color: #3a3a3a;
+  }
+
+  button {
+    padding: 14px 20px;
+    font-size: 1rem;
+    background-color: #e50914;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #f6121d;
+  }
+
+  .result {
+    margin-top: 20px;
+  }
+
+  .movie {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .movie:hover {
+    transform: scale(1.02);
+  }
+
+  .movie h3 {
+    margin: 0 0 10px;
+    font-size: 1.4rem;
+    color: #ffffff;
+  }
+
+  .movie p {
+    margin: 4px 0;
+    color: #bbb;
+    font-size: 0.95rem;
+  }
+
+  .loading, .error, .empty {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.1rem;
+    color: #999;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      margin: 30px 20px;
+      padding: 25px;
+    }
+
+    form {
+      flex-direction: column;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container">
+  <h1>Netflix Movie Recommendations</h1>
+  <form id="recommendation-form">
+    <input type="text" id="title" placeholder="Search for a show..." required />
+    <button type="submit">Recommend</button>
+  </form>
+  <div id="results" class="result"></div>
+</div>
+
+<script>
+  document.getElementById('recommendation-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('title').value.trim();
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '<p class="loading">Finding shows you might love...</p>';
+
+    try {
+      const response = await fetch('/recommend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `title=${encodeURIComponent(title)}`
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Unexpected error occurred.');
+      }
+
+      const recommendations = await response.json();
+      if (recommendations.length === 0) {
+        resultsDiv.innerHTML = '<p class="empty">No recommendations found for that title.</p>';
+        return;
+      }
+
+      let html = '';
+      recommendations.forEach(movie => {
+        html += `
+          <div class="movie">
+            <h3>${movie.title}</h3>
+            <p><strong>Type:</strong> ${movie.type}</p>
+            <p><strong>Genre:</strong> ${movie.genre}</p>
+            <p><strong>Similarity:</strong> ${movie.similarity}</p>
+          </div>
+        `;
+      });
+      resultsDiv.innerHTML = html;
+    } catch (error) {
+      resultsDiv.innerHTML = `<p class="error">🚨 ${error.message}</p>`;
+    }
+  });
+</script>
+{% endblock %}

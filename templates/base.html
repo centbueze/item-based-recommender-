@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        /* Remove default margin/padding from body and html to eliminate extra space */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Set background to black */
+            color: white; /* Set default text color to white */
+        }
+        /* Navbar styling */
+        .navbar {
+            padding: 0 40px; /* Add horizontal padding (left and right) */
+            background-color: black; /* Set navbar background to black */
+            position: sticky; /* Make navbar sticky */
+            top: 0;
+            z-index: 1000; /* Ensure it stays on top */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+            height: 70px; /* Set a fixed height for the navbar */
+            display: flex;
+            align-items: center; /* Vertically center content */
+        }
+        
+        /* Make sure the navbar items are aligned properly */
+        .navbar .container-fluid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0; /* Remove default padding */
+            width: 100%; /* Ensure it spans the full width */
+        }
+        
+        /* Style the company name and icon */
+        .company-info {
+            display: flex;
+            align-items: center;
+            color: white; /* Set text color to white */
+            margin-left: 150px; /* Add space from the left edge */
+        }
+        
+        .company-info img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px; /* Space between icon and text */
+        }
+        
+        .company-info span {
+            font-size: 1.5rem; /* Larger font size for company name */
+            font-weight: bold;
+        }
+        
+        /* Container for company name and position */
+        .company-details {
+            display: flex;
+            flex-direction: column; /* Stack text vertically */
+            align-items: flex-start; /* Align text to the left */
+        }
+        
+        /* Position (A.I Engineer) */
+        .company-details p {
+            font-size: 0.9rem; /* Slightly larger text for the position */
+            margin: 2px 0 0 0; /* Tighten margin for better alignment */
+            color: #bbb; /* Lighter text color for the position */
+        }
+        
+        /* Style the navigation links as separate boxes */
+        .navbar-nav {
+            display: flex;
+            align-items: center; /* Vertically center links */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            height: 100%; /* Ensure it takes full height */
+        }
+        
+        .navbar-nav .nav-item {
+            margin-left: 0; /* Remove space between nav items */
+        }
+        
+        .navbar-nav .nav-link {
+            padding: 0.6rem 1.2rem; /* Slightly larger padding for links */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #333; /* Darker background for links */
+            color: white !important; /* Set link text color to white */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            font-size: 0.95rem; /* Slightly larger font size */
+        }
+        
+        .navbar-nav .nav-link:hover {
+            background-color: #555; /* Slightly lighter on hover */
+            transform: translateY(-2px); /* Add a slight lift effect */
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Add shadow on hover */
+        }
+
+        /* Adjust the navbar-collapse to align with the logo */
+        .navbar-collapse {
+            display: flex;
+            align-items: center; /* Vertically center the links */
+            height: 100%; /* Ensure it takes full height */
+            margin-right: 150px; /* Match the left margin of the logo */
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <!-- Company icon and name on the left -->
+            <div class="company-info">
+                <!-- Company Icon -->
+                <img src="{{ url_for('static', filename='images/brain-logo1.PNG') }}" alt="Company Icon">
+                
+                <!-- Company Name and Position -->
+                <div class="company-details">
+                    <span>King Tech</span>
+                    <p>A.I Engineer</p>
+                </div>
+            </div>
+            
+
+            <!-- Navbar links on the right -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url_for('home')}}">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url_for('about')}}">About</a>
+                    </li>
+                </ul> 
+            </div>
+        </div>
+    </nav>
+    
+    {% block content %}
+    {% endblock %}
+    
+    <!-- Bootstrap 5 JavaScript bundle (includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
